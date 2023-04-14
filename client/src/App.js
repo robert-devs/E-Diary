@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Container,AppBar,Typography,Grow,Grid, GridListTile} from "@material-ui/core"
+import {Container,AppBar,Typography,Grow,Grid} from "@material-ui/core"
 import memories from "./assets/memories.png"
 import {useDispatch} from "react-redux"
 
@@ -17,7 +17,7 @@ const App = () => {
      useEffect(()=>{
       dispatch(getsPosts())
 
-     },[dispatch])
+     },[currentId,dispatch])
 
   return (
       <>

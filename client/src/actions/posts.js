@@ -1,4 +1,4 @@
-import * as api from '../ap1';
+import * as api from '../api';
 
 //actions creator
 

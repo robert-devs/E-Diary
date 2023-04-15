@@ -113,15 +113,6 @@ const Form = ({currentId, setCurrentId}) => {
         >
           submit
         </Button>
-        <Button
-          variant="contained"
-          color="secondary"
-          size="small"
-          fullWidth
-          onClick={clear}
-        >
-          clear{' '}
-        </Button>
 
       </form>
 

@@ -1,9 +1,8 @@
 import React from 'react';
-import {AppBar, Avatar, Toolbar, Typography} from '@material-ui/core';
+import {AppBar, Avatar, Button, Toolbar, Typography} from '@material-ui/core';
 
 import useStyles from './styles';
 import {Link} from 'react-router-dom';
-import {Button} from 'bootstrap';
 import memories from '../../assets/memories.png';
 
 const Navbar = () => {

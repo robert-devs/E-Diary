@@ -1,48 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import {Container,AppBar,Typography,Grow,Grid} from "@material-ui/core"
-import memories from "./assets/memories.png"
-import {useDispatch} from "react-redux"
+import React from 'react';
+import {Container} from '@material-ui/core';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
-import {getsPosts} from "./actions/posts"
-import Posts from './componentes/Posts/Posts'
-import Form from './componentes/Forms/Form'
-import useStyles from './style'
-
+import NavBar from './componentes/Navbar/Navbar';
+import Home from './componentes/home/Home';
+import Auth from './componentes/Auth/Auth';
 
 const App = () => {
-   const classes  = useStyles()
-    const dispatch =  useDispatch()
-    const [currentId ,setCurrentId ]= useState(null)
-
-     useEffect(()=>{
-      dispatch(getsPosts())
-
-     },[currentId,dispatch])
-
   return (
-      <>
-    <Container maxwidth='lg'>
-      <AppBar position ="static" color="inherit" className={classes.appBar}>
-        <Typography className={classes.heading} variant="h2" align="center">
-            Memories
-        </Typography>
-        <img src={memories} alt='memories' height="60px"  className={classes.image}/>
-      </AppBar>
-      <Grow in>
-        <Container>
-          <Grid className={classes.mainContainer} container justifyContent='space-between' alignItems='stretch' spacing={4}>
-            <Grid item xs={12} sm ={7}>
-              <Posts setCurrentId = {setCurrentId}/>
-            </Grid>
-            <Grid item xs={12} sm ={4}>
-              <Form currentId = {currentId} setCurrentId = {setCurrentId}/>
-            </Grid>
-          </Grid>
-        </Container>
-      </Grow>
-    </Container>
-      </>
+    <BrowserRouter>
+      <Container max-width="lg">
+        <NavBar />
+        <Switch>
+          <Route path="/" exact Component={Home} />
+          <Route path="/auth" exact Component={Auth} />
+        </Switch>
+        <Home />
+      </Container>
+    </BrowserRouter>
   );
-}
+};
 
-export default App
+export default App;

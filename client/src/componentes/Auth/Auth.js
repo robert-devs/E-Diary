@@ -6,7 +6,6 @@ import {
   Grid,
   Typography,
   Container,
-  TextField,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 import Input from './Input';
@@ -14,7 +13,7 @@ import useStyle from './styles';
 
 const Auth = () => {
   const classes = useStyle ();
-  const isSignUp = false;
+  const isSignUp = true;
    const handleSubmit =()=>{}
    const handleChange = ()=>{}
     const [showPassword,setShowPassword] = useState(false)
@@ -45,14 +44,14 @@ const Auth = () => {
                 )
               }
               <Input name="email" label="email Address" handleChange={handleChange} type="email"/>
-              <Input name="password" label="password" handleChange={handleChange} type={showPassword?"text":"password"} handleShowPassword={handleShowPassword}/>
+              <Input name="password" label="password" handleChange={handleChange} type={showPassword ?"text":"password"} handleShowPassword={handleShowPassword}/>
               {
                 isSignUp && <Input name="confirmPassword" label="Repeat Passord" handleChange={handleChange} type="password"/>
               }
             </Grid>
             <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
               {
-                isSignUp?"Sign Up":"Sign In"
+                isSignUp ?"Sign Up":"Sign In"
               }
             </Button>
           </form> 

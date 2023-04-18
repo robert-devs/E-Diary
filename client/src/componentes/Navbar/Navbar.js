@@ -13,7 +13,7 @@ const Navbar = () => {
       <div className={classes.brandContainer}>
 
         <Typography
-          component={Link}
+          element={Link}
           to="/"
           className={classes.heading}
           variant="h2"
@@ -49,16 +49,14 @@ const Navbar = () => {
                 logout
               </Button>
             </div>
-          : <>
-              <Button
-                  component={Link}
-                  to="/auth"
-                  variant="contained"
-                  color="primary"
-                >
-                  Sign In
-                </Button>
-          </>}
+          : <Button
+              element={Link}
+              to="/auth/"
+              variant="contained"
+              color="primary"
+            >
+              Sign In
+            </Button>}
       </Toolbar>
     </AppBar>
   );

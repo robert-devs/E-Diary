@@ -8,18 +8,24 @@ import {
   Container,
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
+import {GoogleLogin} from "react-google-login"
 import Input from './Input';
 import useStyle from './styles';
 
 const Auth = () => {
   const classes = useStyle ();
-  const isSignUp = true;
-   const handleSubmit =()=>{}
-   const handleChange = ()=>{}
-    const [showPassword,setShowPassword] = useState(false)
-
+ 
+  const [showPassword,setShowPassword] = useState(false)
+  const[isSignUp,setIsSignUp ]=useState(false)
+  const handleChange = ()=>{}
+  const handleSubmit =()=>{}
+     
+     const switchMode =()=>{
+      setIsSignUp((prevIsSignUp)=>!prevIsSignUp)
+     }
     const handleShowPassword = ()=>{
       setShowPassword((prevShowPassword)=>!prevShowPassword)
+      handleShowPassword(false)
     }
 
   return (
@@ -49,11 +55,26 @@ const Auth = () => {
                 isSignUp && <Input name="confirmPassword" label="Repeat Passord" handleChange={handleChange} type="password"/>
               }
             </Grid>
+
+            <GoogleLogin clientId='GOOGLE ID' render={(renderProps)=>{
+              <Button className={classes.googleButton} color="primary" fullWidth onClick={renderProps.onClick} disabled ={renderProps.disabled}  variant='contained'>Google Sign In</Button>
+            }}/>
             <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
               {
                 isSignUp ?"Sign Up":"Sign In"
               }
             </Button>
+            <Grid container justify='flex-end'>
+              <Grid item >
+                <Button onClick={switchMode}>
+                  {
+                    isSignUp? "Aready have an account? sign in":"Dont have an account? Sign up"
+                  }
+                </Button>
+              </Grid>
+
+              
+            </Grid>
           </form> 
         </Typography>
       </Paper>

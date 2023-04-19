@@ -13,11 +13,11 @@ const Navbar = () => {
       <div className={classes.brandContainer}>
 
         <Typography
-          element={Link}
-          to="/"
+           element={Link}
+              href="/home"
           className={classes.heading}
           variant="h2"
-          align="center"
+           align="center"
         >
           Memories
         </Typography>
@@ -51,7 +51,7 @@ const Navbar = () => {
             </div>
           : <Button
               element={Link}
-              to="/auth/"
+              href="/auth"
               variant="contained"
               color="primary"
             >

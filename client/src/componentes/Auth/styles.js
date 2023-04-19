@@ -5,7 +5,9 @@ export default makeStyles (theme => ({
     marginTop: theme.spacing (8),
     display: 'flex',
     flexDirection: 'column',
+     width:"80%",
     alignItems: 'center',
+    justifyContent:"center",
     padding: theme.spacing (2),
   },
   root: {
@@ -18,8 +20,12 @@ export default makeStyles (theme => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '80%', // Fix IE 11 issue.
     marginTop: theme.spacing (3),
+    display:"flex",
+    justifyContent:"center",
+    flexDirection: 'column',
+    alignItems:"center"
   },
   submit: {
     margin: theme.spacing (3, 0, 2),

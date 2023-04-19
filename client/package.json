@@ -16,7 +16,6 @@
     "lint-staged": "^13.2.1",
     "material-ui-chip-input": "^1.1.0",
     "moment": "^2.27.0",
-    "prettier": "^2.8.7",
     "react": "^18.2.0",
     "react-dom": "^18.0.0-rc.3",
     "react-file-base64": "^1.0.3",
@@ -56,6 +55,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "2.8.7"
   }
 }

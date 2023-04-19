@@ -12,7 +12,7 @@ const App = () => {
       <Navbar />
       <Router>
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />;
         </Routes>
       </Router>

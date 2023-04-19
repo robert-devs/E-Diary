@@ -1,23 +1,34 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {AppBar, Avatar, Button, Toolbar, Typography} from '@material-ui/core';
 
 import useStyles from './styles';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import memories from '../../assets/memories.png';
+import {useDispatch} from 'react-redux';
 
 const Navbar = () => {
   const classes = useStyles ();
-  const user = null;
+  const dispatch = useDispatch ();
+  // const navigate = useHistory ();
+  // const location = useLocation ();
+  const [user, setUser] = useState (
+    JSON.parse (localStorage.getItem ('profile'))
+  );
+  const logout = () => {
+    dispatch ({action: 'LOGOUT'});
+    // navigate ('/auth');
+  };
+
   return (
     <AppBar position="static" color="inherit" className={classes.appBar}>
       <div className={classes.brandContainer}>
 
         <Typography
-           element={Link}
-              href="/home"
+          element={Link}
+          href="/home"
           className={classes.heading}
           variant="h2"
-           align="center"
+          align="center"
         >
           Memories
         </Typography>
@@ -45,6 +56,7 @@ const Navbar = () => {
                 className={classes.logout}
                 color="secondary"
                 variant="contained"
+                onClick={logout}
               >
                 logout
               </Button>

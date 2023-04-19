@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+ import {gapi} from "gapi-script"
+  import { useDispatch } from 'react-redux';
 import {
   Avatar,
   Button,
@@ -12,35 +14,73 @@ import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 import {GoogleLogin} from "react-google-login"
 import Input from './Input';
  import Icon from "./icon"
+  import {useNavigate} from "react-router-dom"
 import useStyle from './styles';
 
+
+ const initialState  ={
+   firstName:"",
+   lastName:"",
+   password:"",
+   confirmPassword:""
+ }
+
 const Auth = () => {
+  const navigate = useNavigate()
+  const dispatch =  useDispatch()
   const classes = useStyle ();
+  const clientId = "579933376445-bar6rlabp4sma6hteder5dcg305tk8eq.apps.googleusercontent.com";
+
+    useEffect(() => {
+    gapi.load("Client:auth2", () => {
+      gapi.auth2.init({clientId:clientId})
+    })
+    }, []);
  
   const [showPassword,setShowPassword] = useState(false)
   const[isSignUp,setIsSignUp ]=useState(false)
-  const handleChange = ()=>{}
-  const handleSubmit =()=>{}
-   const googleSuccess = async (res)=>{
-   console.log(res)
+  const [formData,setFormData] =useState(initialState)
+
+  const handleSubmit =(e)=>{
+     e.preventDefault();
+     console.log( formData)
+     
+    }
+  const handleChange = (e)=>{
+    setFormData({...formData,[e.target.name]:e.target.value})
+  }
+
+
+
+  const googleSuccess = async (res)=>{
+  const result = res?.profileObj;
+  const token = res?.tokenId
+    try {
+      dispatch({type:"AUTH",data:{result,token}})
+      
+       navigate.push('/')
+    } catch (error) {
+      console.log(error)
+      
+    }
    
    }
-   const googleFailure =(error)=>{
+  const googleFailure =(error)=>{
     console.log(error)
     
     console.log("google sign in failed")
     
    }
      
-     const switchMode =()=>{
+  const switchMode =()=>{
       setIsSignUp((prevIsSignUp)=>!prevIsSignUp)
      }
-    const handleShowPassword = ()=>{
+  const handleShowPassword = ()=>{
       setShowPassword((prevShowPassword)=>!prevShowPassword)
       handleShowPassword(false)
     }
 
-  return (
+return (
     <Container component="main" maxwidth="xs">
       <Paper className={classes.paper} elevation={3}>
         <Avatar className={classes.avatar}>
@@ -56,7 +96,7 @@ const Auth = () => {
                     
 
                         <Input name='firstName' label="firstName" handleChange={handleChange}  half/>
-                        <Input name='firstName' label="firstName" handleChange={handleChange}  half/>
+                        <Input name='lastName' label="lastName" handleChange={handleChange}  half/>
                     
                   </>
                 )
@@ -73,9 +113,13 @@ const Auth = () => {
               }
             </Button>
 
-            <GoogleLogin clientId='579933376445-bar6rlabp4sma6hteder5dcg305tk8eq.apps.googleusercontent.com' render={(renderProps)=>(
+            <GoogleLogin
+             clientId={clientId}
+             render={(renderProps)=>(
+              
               <Button 
               className={classes.googleButton}
+
                color="primary"
                 fullWidth 
                 onClick={renderProps.onClick} 

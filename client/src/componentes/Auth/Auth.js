@@ -16,6 +16,7 @@ import Input from './Input';
  import Icon from "./icon"
   import {useNavigate} from "react-router-dom"
 import useStyle from './styles';
+ import {signin,signup} from "../../actions/auth"
 
 
  const initialState  ={
@@ -43,7 +44,12 @@ const Auth = () => {
 
   const handleSubmit =(e)=>{
      e.preventDefault();
-     console.log( formData)
+     if(isSignUp){
+
+       dispatch(signup(formData,navigate))
+     }else{
+      dispatch(signin(formData,navigate))
+    }
      
     }
   const handleChange = (e)=>{

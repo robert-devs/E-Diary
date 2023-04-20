@@ -1,6 +1,5 @@
-import React, { useState,useEffect } from 'react';
- import {gapi} from "gapi-script"
-  import { useDispatch } from 'react-redux';
+import React, { useState, } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Avatar,
   Button,
@@ -13,10 +12,11 @@ import {
 import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
 import {GoogleLogin} from "react-google-login"
 import Input from './Input';
- import Icon from "./icon"
-  import {useNavigate} from "react-router-dom"
+import Icon from "./icon"
+import {useNavigate} from "react-router-dom"
 import useStyle from './styles';
- import {signin,signup} from "../../actions/auth"
+ import {signIn,signUp} from "../../actions/auth"
+  import { AUTH } from '../../constants/actionsTypes';
 
 
  const initialState  ={
@@ -32,45 +32,39 @@ const Auth = () => {
   const classes = useStyle ();
   const clientId = "579933376445-bar6rlabp4sma6hteder5dcg305tk8eq.apps.googleusercontent.com";
 
-    useEffect(() => {
-    gapi.load("Client:auth2", () => {
-      gapi.auth2.init({clientId:clientId})
-    })
-    }, []);
+  
  
   const [showPassword,setShowPassword] = useState(false)
   const[isSignUp,setIsSignUp ]=useState(false)
   const [formData,setFormData] =useState(initialState)
 
-  const handleSubmit =(e)=>{
-     e.preventDefault();
-     if(isSignUp){
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-       dispatch(signup(formData,navigate))
-     }else{
-      dispatch(signin(formData,navigate))
+    if (isSignUp) {
+      dispatch(signUp(formData, navigate));
+    } else {
+      dispatch(signIn(formData, navigate));
     }
-     
-    }
+  };
   const handleChange = (e)=>{
     setFormData({...formData,[e.target.name]:e.target.value})
   }
 
 
 
-  const googleSuccess = async (res)=>{
-  const result = res?.profileObj;
-  const token = res?.tokenId
+  const googleSuccess = async (res) => {
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+
     try {
-      dispatch({type:"AUTH",data:{result,token}})
-      
-       navigate.push('/')
+      dispatch({ type: AUTH, data: { result, token } });
+
+      navigate('/');
     } catch (error) {
-      console.log(error)
-      
+      console.log(error);
     }
-   
-   }
+  };
   const googleFailure =(error)=>{
     console.log(error)
     
@@ -80,10 +74,10 @@ const Auth = () => {
      
   const switchMode =()=>{
       setIsSignUp((prevIsSignUp)=>!prevIsSignUp)
+      setShowPassword(false)
      }
   const handleShowPassword = ()=>{
       setShowPassword((prevShowPassword)=>!prevShowPassword)
-      handleShowPassword(false)
     }
 
 return (

@@ -95,16 +95,16 @@ return (
                   <>
                     
 
-                        <Input name='firstName' label="firstName" handleChange={handleChange}  half/>
-                        <Input name='lastName' label="lastName" handleChange={handleChange}  half/>
+                        <Input name='firstName' label="First Name" handleChange={handleChange}  half/>
+                        <Input name='lastName' label="Last Name" handleChange={handleChange}  half/>
                     
                   </>
                 )
               }
-              <Input name="email" label="email Address" handleChange={handleChange} type="email"/>
+              <Input name="email" label="Email Address" handleChange={handleChange} type="email"/>
               <Input name="password" label="password" handleChange={handleChange} type={showPassword ?"text":"password"} handleShowPassword={handleShowPassword}/>
               {
-                isSignUp && <Input name="confirmPassword" label="Repeat Passord" handleChange={handleChange} type="password"/>
+                isSignUp && <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password"/>
               }
             </Grid>
             <Button type='submit' fullWidth variant='contained' color='primary' className={classes.submit}>
@@ -135,7 +135,7 @@ return (
               <Grid item >
                 <Button onClick={switchMode}>
                   {
-                    isSignUp? "Aready have an account? sign in":"Dont have an account? Sign up"
+                    isSignUp? "Already have an account? sign in":"Don't have an account? Sign up"
                   }
                 </Button>
               </Grid>

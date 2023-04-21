@@ -1,25 +1,30 @@
 import jwt from "jsonwebtoken";
 
-
+const secret = 'test';
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(" ")[1];
-    const isCustomAuth = token.length < 500;
+    const authHeader = req.headers.authorization;
+    if (authHeader) {
+      const token = authHeader.split(" ")[1];
+      const isCustomAuth = token.length < 500;
 
-    let decodedData;
+      let decodedData;
 
-    if (token && isCustomAuth) {      
-      decodedData = jwt.verify(token,test);
+      if (token && isCustomAuth) {      
+        decodedData = jwt.verify(token, secret);
 
-      req.userId = decodedData?.id;
+        req.userId = decodedData?.id;
+      } else {
+        decodedData = jwt.decode(token);
+
+        req.userId = decodedData?.sub;
+      }    
+
+      next();
     } else {
-      decodedData = jwt.decode(token);
-
-      req.userId = decodedData?.sub;
-    }    
-
-    next();
+      throw new Error("Authorization header is missing.");
+    }
   } catch (error) {
     console.log(error);
   }

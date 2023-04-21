@@ -24,7 +24,7 @@ const Navbar = () => {
 
         <Typography
           element={Link}
-          href="/home"
+          href="/"
           className={classes.heading}
           variant="h2"
            cursor='pointer'

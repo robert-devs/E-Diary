@@ -9,8 +9,8 @@ import Navbar from './componentes/navbar/Navbar';
 const App = () => {
   return (
     <Container maxWidth="lg">
-      <Navbar />
       <Router>
+      <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />;
@@ -19,5 +19,4 @@ const App = () => {
     </Container>
   );
 };
-
-export default App;
+ export default App

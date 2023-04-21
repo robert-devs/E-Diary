@@ -2,17 +2,23 @@ import axios from 'axios';
 
 const API = axios.create({ baseURL: 'http://localhost:5000' });
 
-export const fetchPosts = () => API.get ('/posts');
+API.interceptors.request.use((req) => {
+  if (localStorage.getItem("profile")) {
+    req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`; // Fixed the Authorization header setup
+  }
+  return req;
+});
 
-export const createPost = nwePost => API.post ("/posts", nwePost);
+export const fetchPosts = () => API.get('/posts');
+
+export const createPost = newPost => API.post("/posts", newPost);
 
 export const updatePost = (id, updatedPost) =>
-  API.patch (`posts/${id}`, updatedPost);
+  API.patch(`posts/${id}`, updatedPost);
 
-export const deletePost = id => API.delete (`/posts/${id}`, deletePost);
+export const deletePost = id => API.delete(`/posts/${id}`, deletePost);
 
-export const likePost = id => API.patch (`/posts/${id}/likePost`);
+export const likePost = id => API.patch(`/posts/${id}/likePost`);
 
-
-export const signIn =(formData) =>API.post('/users/signIn',formData)
-export const signUp =(formData) =>API.post('/users/signUp',formData)
+export const signIn = formData => API.post('/users/signIn', formData);
+export const signUp = formData => API.post('/users/signUp', formData);

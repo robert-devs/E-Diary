@@ -7,13 +7,15 @@ import {createPost, updatedPost} from '../../actions/posts';
 import {useSelector} from 'react-redux';
 
 const Form = ({currentId, setCurrentId}) => {
+  const classes = useStyles ();
+  const dispatch = useDispatch ();
+
+  const user = JSON.parse(localStorage.getItem("profile"))
   const post = useSelector (
     state =>
-      currentId ? state.posts.find (message => message._id === currentId) : null
-  );
-  const dispatch = useDispatch ();
+      currentId ? state.posts.find (message => message._id === currentId) : null)
+ 
   const [postData, setPostData] = useState ({
-    creator: '',
     title: '',
     message: '',
     tags: '',
@@ -27,26 +29,34 @@ const Form = ({currentId, setCurrentId}) => {
     [post]
   );
 
-  const classes = useStyles ();
   const handleSubmit = e => {
     e.preventDefault ();
     if (currentId) {
-      dispatch (updatedPost (currentId, postData));
+      dispatch (createPost ({...postData,name:user?.result?.name}));
     } else {
-      dispatch (createPost (postData));
+      dispatch (updatedPost (currentId, {...postData,name:user?.result?.name}));
     }
     clear ();
   };
   const clear = () => {
     setCurrentId (null);
     setPostData ({
-      creator: '',
       title: '',
       message: '',
       tags: '',
       selectedFile: '',
     });
   };
+
+  if(!user?.result?.name){
+    return(
+    <Paper className={classes.name}>
+      <Typography align = "center" variant='h6'>
+          Please sign in to create your memories and like others memories
+      </Typography>
+    </Paper>
+    )
+  }
   return (
     <Paper className={classes.paper}>
       <form
@@ -59,14 +69,7 @@ const Form = ({currentId, setCurrentId}) => {
         <Typography variant="h6">
           {currentId ? 'updating' : 'creating'} a Memory
         </Typography>
-        <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={postData.creator}
-          onChange={e => setPostData ({...postData, creator: e.target.value})}
-        />
+     
         <TextField
           name="title"
           variant="outlined"

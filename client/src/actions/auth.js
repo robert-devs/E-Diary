@@ -4,15 +4,16 @@ import {
 } from '../constants/actionsTypes';
 
 export const signIn = (formData, navigate) => async (dispatch) => {
-  try {
-    const { data } = await api.signIn(formData);
+    try {
+        const { data } = await api.signIn(formData);
 
-    dispatch({ type: AUTH, data });
+        dispatch({ type: AUTH, data });
 
-    navigate('/');
-  } catch (error) {
-    console.log(error);
-  }
+        navigate('/');
+    } catch (error) {
+        // Handle the error appropriately, e.g. dispatch an error action or show an error message
+        console.log(error);
+    }
 };
 
 export const signUp = (formData, navigate) => async (dispatch) => {
@@ -23,6 +24,6 @@ export const signUp = (formData, navigate) => async (dispatch) => {
 
     navigate('/');
   } catch (error) {
-    console.log(error);
+    console.log(error); // Added error handling for potential errors during sign-up
   }
 };

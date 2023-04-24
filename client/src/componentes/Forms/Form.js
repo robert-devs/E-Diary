@@ -12,7 +12,7 @@ const Form = ({currentId, setCurrentId}) => {
 
   const user = JSON.parse(localStorage.getItem("profile"))
 
-  const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
+  const [postData, setPostData] = useState({ name: '', title: '', message: '', tags: '', selectedFile: '' });
   const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
 
   useEffect (
@@ -25,9 +25,9 @@ const Form = ({currentId, setCurrentId}) => {
   const handleSubmit = e => {
     e.preventDefault ();
     if (currentId === 0) {
-      dispatch (createPost ({...postData,name:user?.result?.name}));
+      dispatch (createPost ({...postData,name:user?.user?.name}));
     } else {
-      dispatch (updatedPost (currentId, {...postData,name:user?.result?.name}));
+      dispatch (updatedPost (currentId, {...postData,name:user?.user?.name}));
     }
     clear ();
   };
@@ -41,7 +41,7 @@ const Form = ({currentId, setCurrentId}) => {
     });
   };
 
-  if(!user?.result?.name){
+  if(!user?.user?.name){
     return(
     <Paper className={classes.name}>
       <Typography align = "center" variant='h6'>

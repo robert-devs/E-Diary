@@ -11,16 +11,9 @@ const Form = ({currentId, setCurrentId}) => {
   const dispatch = useDispatch ();
 
   const user = JSON.parse(localStorage.getItem("profile"))
-  const post = useSelector (
-    state =>
-      currentId ? state.posts.find (message => message._id === currentId) : null)
- 
-  const [postData, setPostData] = useState ({
-    title: '',
-    message: '',
-    tags: '',
-    selectedFile: '',
-  });
+
+  const [postData, setPostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
+  const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
 
   useEffect (
     () => {
@@ -31,7 +24,7 @@ const Form = ({currentId, setCurrentId}) => {
 
   const handleSubmit = e => {
     e.preventDefault ();
-    if (currentId) {
+    if (currentId === 0) {
       dispatch (createPost ({...postData,name:user?.result?.name}));
     } else {
       dispatch (updatedPost (currentId, {...postData,name:user?.result?.name}));

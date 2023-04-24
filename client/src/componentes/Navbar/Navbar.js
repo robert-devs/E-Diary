@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@material-ui/core';
 import useStyles from './styles';
 import { Link } from 'react-router-dom';
@@ -7,17 +7,20 @@ import { useNavigate } from 'react-router-dom';
 import memories from '../../assets/memories.png';
 import { useDispatch } from 'react-redux';
 
-const Navbar = ({ history }) => {
+const Navbar = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
-  const logout = () => {
+  
+  const logout = useCallback(() => {
     dispatch({ type: 'LOGOUT' });
-    // navigate (-1);
-  };
-   useEffect(() => {
+    navigate ('/auth');
+    setUser(null)
+  }, [dispatch, navigate]);
+
+  useEffect(() => {
     const token = user?.token;
 
     if (token) {
@@ -27,14 +30,14 @@ const Navbar = ({ history }) => {
     }
 
     setUser(JSON.parse(localStorage.getItem('profile')));
-  }, [navigate]);
+  }, [navigate, logout]);
 
   return (
     <AppBar position="static" color="inherit" className={classes.appBar}>
       <div className={classes.brandContainer}>
         <Typography
-          element={Link}
-          href="/"
+          component={Link}
+          to="/"
           className={classes.heading}
           variant="h2"
           cursor="pointer"
@@ -45,29 +48,20 @@ const Navbar = ({ history }) => {
         <img src={memories} alt="memories" height="60px" className={classes.image} />
       </div>
       <Toolbar className={classes.toolbar}>
-        {user && user.result ? (
+        {user?.result ? (
           <div className={classes.profile}>
-            <Avatar
-              className={classes.purple}
-              alt={user?.result.name}
-              src={user?.result.imageUrl}
-            >
+            <Avatar className={classes.purple} alt={user?.result.name} src={user?.result.imageUrl}>
               {user?.result.name.charAt(0)}
             </Avatar>
-            <Typography classes={classes.userName} variant="h6">
-              {user.result.name}
+            <Typography className={classes.userName} variant="h6">
+              {user?.result.name}
             </Typography>
-            <Button
-              className={classes.logout}
-              color="secondary"
-              variant="contained"
-              onClick={logout}
-            >
-              logout
+            <Button variant="contained" className={classes.logout} color="secondary" onClick={logout}>
+              Logout
             </Button>
           </div>
         ) : (
-          <Button element={Link} href="/auth" variant="contained" color="primary">
+          <Button component={Link} to="/auth" variant="contained" color="primary">
             Sign In
           </Button>
         )}

@@ -39,7 +39,7 @@ const Navbar = () => {
       <div className={classes.brandContainer}>
         <Typography
           element={Link}
-          to="/"
+          href="/"
           className={classes.heading}
           variant="h2"
           cursor="pointer"
@@ -63,7 +63,7 @@ const Navbar = () => {
             </Button>
           </div>
         ) : (
-          <Button element={Link} to="/auth" variant="contained" color="primary">
+          <Button element={Link} href="/auth" variant="contained" color="primary">
             Sign In
           </Button>
         )}

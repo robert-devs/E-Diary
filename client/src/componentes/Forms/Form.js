@@ -76,8 +76,10 @@ const Form = ({currentId, setCurrentId}) => {
           name="message"
           variant="outlined"
           label="message"
+          multiline 
+          minRows={4}
           fullWidth
-          value={postData.message}
+          value={postData.message.length > 15 ? postData.message.slice(0, 15) + '...' : postData.message}  
           onChange={e => setPostData ({...postData, message: e.target.value})}
         />
         ;

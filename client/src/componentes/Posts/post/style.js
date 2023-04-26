@@ -35,6 +35,7 @@ export default makeStyles({
   },
   grid: {
     display: 'flex',
+    
   },
   details: {
     display: 'flex',

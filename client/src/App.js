@@ -19,6 +19,7 @@ const App = () => {
           <Route path="/posts/search" element={<Home />} />
           <Route path="/posts/:id" element={<PostDetail />} />
           <Route path="/auth" element={<Auth />}/>
+         <Route path="/auth" element={user?.user ? <Auth /> : <Navigate to="/posts" />} />
         </Routes>
       </Router>
     </Container>

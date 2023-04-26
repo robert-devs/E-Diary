@@ -1,4 +1,6 @@
-import {Container, Grid, Grow, Paper,} from '@material-ui/core';
+import {Container, Grid, Grow, Paper,TextField,Button} from '@material-ui/core';
+import ChipInput from  "material-ui-chip-input"
+import {useHistory,useLocation} from "react-router-dom"
 import Posts from '../Posts/Posts';
 
 import Form from '../Forms/Form';
@@ -8,11 +10,16 @@ import React, {useEffect, useState} from 'react';
 import {getsPosts} from '../../actions/posts';
 import Paginate from '../pagination/Pagination';
  
+function useQuery (){
+  return new URLSearchParams(useLocation().search)
+}
 
 const Home = () => {
   const [currentId, setCurrentId] = useState (null);
     // const classes = useStyles ();
   const dispatch = useDispatch ();
+  const query = useQuery()
+  const history = useHistory()
 
   useEffect (
     () => {

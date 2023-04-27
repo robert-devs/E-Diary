@@ -7,7 +7,7 @@ import Form from '../Forms/Form';
 import { useDispatch } from 'react-redux';
 
 import React, { useEffect, useState } from 'react';
-import { getsPosts, getsPostsBySearch } from '../../actions/posts';
+import { getsPosts, getPostBySearch } from '../../actions/posts';
 import Paginate from '../pagination/Pagination';
 import useStyles from "./styles"
 
@@ -35,8 +35,9 @@ const Home = () => {
   );
 
   const searchPost =()=>{
-    if(search.trim()){
-      dispatch(getsPostsBySearch({search,tags:tags.join(',')}))
+    if(search.trim() || tags){
+      dispatch(getPostBySearch({ search, tags: tags.join(',') }));
+      navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(",")}`)
     }else{
       navigate('/')
     }
@@ -87,9 +88,11 @@ const Home = () => {
 
             </AppBar>
             <Form currentId={currentId} setCurrentId={setCurrentId} />
-            <Paper className="" elevation={6}>
-              <Paginate />
-            </Paper>
+             {(!searchQuery && !tags.length) && (
+              <Paper className={classes.pagination} elevation={6}>
+                <Paginate page={page} />
+              </Paper>
+            )}
           </Grid>
         </Grid>
       </Container>

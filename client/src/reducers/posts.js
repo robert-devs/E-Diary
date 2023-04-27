@@ -4,10 +4,13 @@ import {
   FETCH_ALL,
   DELETE,
   UPDATE,
+  FETCH_BY_SEARCH,
 } from '../constants/actionsTypes';
 
 export default (posts = [], action) => {
   switch (action.type) {
+    case FETCH_BY_SEARCH:
+      return action.payload
     case DELETE:
       return posts.filter (post => post._id !== action.payload);
 

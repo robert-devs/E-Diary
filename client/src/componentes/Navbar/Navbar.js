@@ -32,7 +32,7 @@ const Navbar = () => {
     setUser(JSON.parse(localStorage.getItem('profile')));
   }, [navigate, logout]);
 
-  console.log(user?.user);
+  // console.log(user?.user);
 
   return (
     <AppBar position="static" color="inherit" className={classes.appBar}>

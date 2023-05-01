@@ -14,7 +14,7 @@ const Posts = ({setCurrentId}) => {
   return isLoading
     ? <CircularProgress />
     : <Grid
-        className={classes.container}
+        className={classes.mainContainer}
         container
         alignItems="stretch"
         spacing={4}

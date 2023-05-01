@@ -13,7 +13,7 @@ import {
 const router = express.Router ();
 
 router.get ('/', getPosts);
-router.get ('/:id', getPost);
+router.get('/:id', getPost);
 router.get ('/search', getPostsBySearch);
 router.post ('/',auth, createPost);
 router.patch ('/:id',auth, updatePost);

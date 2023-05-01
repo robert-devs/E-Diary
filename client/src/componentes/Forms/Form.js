@@ -3,7 +3,7 @@ import useStyles from './style';
 import {TextField, Button, Typography, Paper} from '@material-ui/core';
 import FileBase from 'react-file-base64';
 import {useDispatch} from 'react-redux';
-import {createPost, updatedPost} from '../../actions/posts';
+import {createPost, updatePost} from '../../actions/posts';
 import {useSelector} from 'react-redux';
 
 const Form = ({currentId, setCurrentId}) => {
@@ -13,7 +13,7 @@ const Form = ({currentId, setCurrentId}) => {
   const user = JSON.parse(localStorage.getItem("profile"))
 
   const [postData, setPostData] = useState({ name: '', title: '', message: '', tags: '', selectedFile: '' });
-  const post = useSelector((state) => (currentId ? state.posts.find((message) => message._id === currentId) : null));
+  const post = useSelector((state) => (currentId ? state.posts.posts.find((message) => message._id === currentId) : null));
 
   useEffect (
     () => {
@@ -27,7 +27,7 @@ const Form = ({currentId, setCurrentId}) => {
     if (!currentId ) {
       dispatch (createPost ({...postData,name:user?.user?.name}));
     } else {
-      dispatch (updatedPost (currentId, {...postData,name:user?.user?.name}));
+      dispatch (updatePost (currentId, {...postData,name:user?.user?.name}));
     }
     clear ();
   };

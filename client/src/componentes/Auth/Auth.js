@@ -10,13 +10,13 @@ import {
   
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOpenOutlined';
-import {GoogleLogin} from "react-google-login"
+// import {GoogleLogin} from "react-google-login"
 import Input from './Input';
-import Icon from "./icon"
+// import Icon from "./icon"
 import {useNavigate} from "react-router-dom"
 import useStyle from './styles';
  import {signIn,signUp} from "../../actions/auth"
-  import { AUTH } from '../../constants/actionsTypes';
+  // import { AUTH } from '../../constants/actionsTypes';
 
 
  const initialState  ={
@@ -30,7 +30,7 @@ const Auth = () => {
   const navigate = useNavigate()
   const dispatch =  useDispatch()
   const classes = useStyle ();
-  const clientId = "579933376445-bar6rlabp4sma6hteder5dcg305tk8eq.apps.googleusercontent.com";
+  // const clientId = "579933376445-bar6rlabp4sma6hteder5dcg305tk8eq.apps.googleusercontent.com";
 
   
  
@@ -53,24 +53,24 @@ const Auth = () => {
 
 
 
-  const googleSuccess = async (res) => {
-    const result = res?.profileObj;
-    const token = res?.tokenId;
+  // const googleSuccess = async (res) => {
+  //   const result = res?.profileObj;
+  //   const token = res?.tokenId;
 
-    try {
-      dispatch({ type: AUTH, data: { result, token } });
+  //   try {
+  //     dispatch({ type: AUTH, data: { result, token } });
 
-      navigate('/');
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const googleFailure =(error)=>{
-    console.log(error)
+  //     navigate('/');
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // const googleFailure =(error)=>{
+  //   console.log(error)
     
-    console.log("google sign in failed")
+  //   console.log("google sign in failed")
     
-   }
+  //  }
      
   const switchMode =()=>{
       setIsSignUp((prevIsSignUp)=>!prevIsSignUp)
@@ -113,7 +113,7 @@ return (
               }
             </Button>
 
-            <GoogleLogin
+            {/* <GoogleLogin
              clientId={clientId}
              render={(renderProps)=>(
               
@@ -130,7 +130,7 @@ return (
                 onSuccess={googleSuccess}
                 onFailure={googleFailure}
                  cookiePolicy='single_host_origin'
-              />
+              /> */}
             <Grid container justifyContent='flex-end' >
               <Grid item >
                 <Button onClick={switchMode}>

@@ -5,10 +5,12 @@ import FileBase from 'react-file-base64';
 import {useDispatch} from 'react-redux';
 import {createPost, updatePost} from '../../actions/posts';
 import {useSelector} from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Form = ({currentId, setCurrentId}) => {
   const classes = useStyles ();
   const dispatch = useDispatch ();
+  const navigate = useNavigate()
 
   const user = JSON.parse(localStorage.getItem("profile"))
 
@@ -25,7 +27,8 @@ const Form = ({currentId, setCurrentId}) => {
   const handleSubmit = e => {
     e.preventDefault ();
     if (!currentId ) {
-      dispatch (createPost ({...postData,name:user?.user?.name}));
+      dispatch (createPost ({...postData,name:user?.user?.name},navigate));
+      
     } else {
       dispatch (updatePost (currentId, {...postData,name:user?.user?.name}));
     }

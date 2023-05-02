@@ -1,31 +1,34 @@
 import React, { useEffect } from 'react';
 import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import moment from 'moment'
+import { useParams,  Link } from 'react-router-dom';
 import useStyles from './styles.js';
-import { getPost } from '../../actions/posts.js';
+import { getPost} from '../../actions/posts.js';
 
 const PostDetail = () => {
   const classes = useStyles();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { post, posts, isLoading } = useSelector((state) => state.posts);
+  const { post,  isLoading } = useSelector((state) => state.posts);
 
   useEffect(() => {
     dispatch(getPost(id));
   }, [id, dispatch]);
+
+
+ 
 
   if (!post) return null;
 
   if (isLoading) {
     return (
       <Paper elevation={6} className={classes.loadingPaper}>
-        <CircularProgress size="7em" />
+        <CircularProgress size="5em" />
       </Paper>
     );
   }
+
 
   return (
     <Paper style={{ padding: '20px', borderRadius: '15px' }} elevation={6}>
@@ -63,6 +66,7 @@ const PostDetail = () => {
             alt={post.title}
           />
         </div>
+     
       </div>
     </Paper>
   );

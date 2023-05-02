@@ -51,7 +51,7 @@ export const createPost = (post,navigate) => async dispatch => {
   try {
     dispatch({type:START_LOADING})
     const {data} = await api.createPost (post);
-    navigate(`/posts/${post._id}`);
+    navigate(`/posts/${data._id}`);
     dispatch ({type: CREATE, payload: data});
     dispatch({type:END_LOADING})
 

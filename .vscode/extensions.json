@@ -2,6 +2,7 @@
   "recommendations": [
     "tabnine.tabnine-vscode",
     "esbenp.prettier-vscode",
-    "github.vscode-pull-request-github"
+    "github.vscode-pull-request-github",
+    "hediet.vscode-drawio"
   ]
 }

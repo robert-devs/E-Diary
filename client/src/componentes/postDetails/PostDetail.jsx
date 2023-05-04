@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core';
+import { Paper, Typography, CircularProgress } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment'
 import { useParams,  Link } from 'react-router-dom';
@@ -49,15 +49,7 @@ const PostDetail = () => {
           </Typography>
           <Typography variant="h6">Created by: {post.name}</Typography>
           <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
-          <Divider style={{ margin: '20px 0' }} />
-          <Typography variant="body1">
-            <strong>Realtime Chat - coming soon!</strong>
-          </Typography>
-          <Divider style={{ margin: '20px 0' }} />
-          <Typography variant="body1">
-            <strong>Comments - coming soon!</strong>
-          </Typography>
-          <Divider style={{ margin: '20px 0' }} />
+          
         </div>
         <div className={classes.imageSection}>
           <img

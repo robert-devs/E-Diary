@@ -10,6 +10,8 @@ import {
   LIKE,
   FETCH_POST,
 } from '../constants/actionsTypes';
+
+
 //actions creator
 
 export const getsPosts = (page) => async dispatch => {

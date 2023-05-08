@@ -1,4 +1,5 @@
-import * as api from '../api';
+import * as api from "../api";
+
 import {
   AUTH
 } from '../constants/actionsTypes';
@@ -11,8 +12,7 @@ export const signIn = (formData, navigate) => async (dispatch) => {
 
         navigate('/');
     } catch (error) {
-        // Handle the error appropriately, e.g. dispatch an error action or show an error message
-        console.log(error);
+      console.log(error);
     }
 };
 
@@ -24,6 +24,6 @@ export const signUp = (formData, navigate) => async (dispatch) => {
 
     navigate('/');
   } catch (error) {
-    console.log(error); // Added error handling for potential errors during sign-up
+    console.log(error);
   }
 };

@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
   media: {
@@ -20,6 +20,10 @@ export default makeStyles((theme) => ({
     borderRadius: '20px',
     margin: '10px',
     flex: 1,
+    display:"flex",
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   imageSection: {
     marginLeft: '20px',

@@ -1,18 +1,14 @@
-import React from 'react'
-import useStyles from './style'
-import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@material-ui/core/';
-import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import DeleteIcon from '@material-ui/icons/Delete';
-import moment from 'moment';
-import { useDispatch } from 'react-redux';
-import {  deletePost, likePost } from '../../../actions/posts';
-import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
-import { useNavigate } from 'react-router-dom';
-
-
-
-
+import DeleteIcon from "@material-ui/icons/Delete";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import React from "react";
+import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import ThumbUpAltOutlinedIcon from "@material-ui/icons/ThumbUpAltOutlined";
+import moment from "moment";
+import useStyles from "./style";
+import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@material-ui/core/";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { deletePost, likePost } from "../../../actions/posts";
 
 const Post = ({ post, setCurrentId }) => {
   const dispatch = useDispatch();
@@ -51,16 +47,18 @@ const Post = ({ post, setCurrentId }) => {
           <Typography variant="h6">{post.name}</Typography>
           <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
         </div>
-          {(user?.user?.googleId === post?.creator || user?.user?._id === post?.creator) && (
+          {( user?.user?._id === post?.creator) && (
               
             <div className={classes.overlay2} name="edit">
               <Button
+                  
                   onClick={(e) => {
                     e.stopPropagation();
                     setCurrentId(post._id);
                   }}
                   style={{ color: 'white' }}
                   size="small"
+                  
               >
                   <MoreHorizIcon fontSize="medium" />
               </Button>
@@ -82,7 +80,7 @@ const Post = ({ post, setCurrentId }) => {
       
       <CardActions className={classes.cardActions}>
         <Button size="small" color="primary"  disabled={!user?.user}   onClick={() => dispatch(likePost(post._id))}><Likes/></Button>
-        {(user?.user?.googleId === post?.creator || user?.user?._id === post?.creator) && (
+        {( user?.user?._id === post?.creator) && (
           <Button size="small" color="secondary" onClick={() => dispatch(deletePost(post._id))}>
             <DeleteIcon fontSize="small" /> &nbsp; Delete
           </Button>

@@ -1,14 +1,13 @@
-import React from 'react';
+import React from "react";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+
 import {
   TextField,
-  //   grid,
-  //   InputButton,
   IconButton,
   Grid,
   InputAdornment,
 } from '@material-ui/core';
-import Visibility from '@material-ui/icons/Visibility';
-import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
 const Input = ({
   name,
